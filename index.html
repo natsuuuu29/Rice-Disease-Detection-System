@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Blast Disease Detection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Rice Blast Disease Detection</h1>
+                <div class="subtitle">Early Detection System Using Convolutional Neural Networks</div>               
+            </div>           
+        </div>
+    </header>
+       
+
+    <div class="container">
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-column">
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-upload"></i> Image Upload & Analysis</h2>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop Your Image Here</h3>
+                        <p>Supported formats: JPG, PNG, WEBP</p>
+                        <button class="browse-btn" id="browseBtn">Browse Files</button>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div class="tip">
+                        <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Use well-lit images of rice leaves for best results
+                    </div>
+                    
+                    <h3 style="margin-top: 25px; margin-bottom: 15px;">Sample Images</h3>
+                    <div class="image-preview-container">
+                        <div class="preview-item">
+                            <img src="image/dataset-card.jpg" alt="Healthy Leaf" class="preview-img" data-type="healthy">
+                            <div class="preview-label healthy">Healthy Leaf</div>
+                        </div>
+                        <div class="preview-item">
+                            <img src="image/images (2).jpg" alt="Mild Infection" class="preview-img" data-type="mild">
+                            <div class="preview-label mild">Mild Infection</div>
+                        </div>
+                        <div class="preview-item">
+                            <img src="image/image 3.jpg" alt="Severe Infection" class="preview-img" data-type="severe">
+                            <div class="preview-label severe">Severe Infection</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card results-section">
+                    <h2 class="card-title"><i class="fas fa-chart-line"></i> Analysis Results</h2>
+                    
+                    <div class="image-preview" id="imagePreview">
+                        <div class="no-image">
+                            <i class="fas fa-leaf"></i>
+                            <p>No image selected</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="action-btn analyze-btn" id="analyzeBtn">
+                            <span class="loading" style="display: none;"></span>
+                            <span>Analyze for Rice Blast</span>
+                        </button>
+                        <button class="action-btn clear-btn" id="clearBtn">Clear Results</button>
+                    </div>
+                    
+                    <div class="analysis-progress" id="analysisProgress">
+                        <h3 style="margin-bottom: 15px;">Analyzing with CNN Model...</h3>
+                        <p style="margin-bottom: 20px; color: #666;">Processing image features and running detection algorithm</p>
+                        
+                        <div class="progress-steps">
+                            <div class="step active" id="step1">
+                                <div class="step-icon">1</div>
+                                <div class="step-label">Feature Extraction</div>
+                            </div>
+                            <div class="step" id="step2">
+                                <div class="step-icon">2</div>
+                                <div class="step-label">Pattern Recognition</div>
+                            </div>
+                            <div class="step" id="step3">
+                                <div class="step-icon">3</div>
+                                <div class="step-label">Disease Classification</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="results-content" id="resultsContent">
+                        <div class="disease-name" id="diseaseName">Rice Blast Detected</div>
+                        <div class="confidence">Confidence: <span class="confidence-value" id="confidenceValue">92%</span></div>
+                        
+                        <h3>Key Symptoms</h3>
+                        <div class="key-symptoms" id="keySymptoms">
+                            <!-- Symptoms will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="card disease-info">
+                    <h2 class="card-title"><i class="fas fa-info-circle"></i> Disease Information</h2>
+                    
+                    <h3 style="margin-bottom: 15px; color: var(--primary-color);">Rice Blast Overview</h3>
+                    <ul style="margin-bottom: 25px; padding-left: 20px;">
+                        <li>Known to affect rice yield significantly</li>
+                        <li>Typically appears as lesions on leaves</li>
+                        <li>Highly contagious among plants</li>
+                        <li>Can lead to complete crop loss in severe cases</li>
+                    </ul>
+                    
+                    <div class="info-grid">
+                        <div class="info-card conditions-card">
+                            <h4><i class="fas fa-temperature-high"></i> Favorable Conditions</h4>
+                            <ul>
+                                <li>High humidity (above 90%)</li>
+                                <li>Moderate temperatures (20-30°C)</li>
+                                <li>Prolonged leaf wetness</li>
+                                <li>Dense planting with poor air circulation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="info-card prevention-card">
+                            <h4><i class="fas fa-shield-alt"></i> Prevention Methods</h4>
+                            <ul>
+                                <li>Use resistant rice varieties</li>
+                                <li>Avoid excessive nitrogen fertilizer</li>
+                                <li>Ensure proper field drainage</li>
+                                <li>Apply fungicides preventatively</li>
+                                <li>Practice crop rotation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 class="card-title"><i class="fas fa-history"></i> Detection History</h2>
+                    
+                    <div class="detection-history">
+                        <div class="history-card">
+                            <div class="history-value healthy-stat" id="healthyCount">0</div>
+                            <div class="history-label">Healthy</div>
+                        </div>
+                        <div class="history-card">
+                            <div class="history-value infected-stat" id="infectedCount">0</div>
+                            <div class="history-label">Infected</div>
+                        </div>
+                        <div class="history-card">
+                            <div class="history-value confidence-stat" id="avgConfidence">0%</div>
+                            <div class="history-label">Avg. Confidence</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3 class="chart-title">Detection Distribution</h3>
+                        <div class="chart" id="chart">
+                            <!-- Chart bars will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Copyright © 2025 by Natsuuu | All Rights Reserved</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Rice Blast Disease Detection System</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
